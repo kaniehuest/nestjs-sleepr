@@ -19,7 +19,8 @@ export class PaymentsService {
       amount: amount * 100,
       confirm: true,
       currency: 'clp',
-      payment_method: 'pm_card_visa'
+      payment_method: 'pm_card_visa',
+      return_url: "https://google.com"
     })
 
     return paymentIntent
