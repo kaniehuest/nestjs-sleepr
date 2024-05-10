@@ -23,12 +23,12 @@ export class PaymentsService {
     const paymentIntent = await this.stripe.paymentIntents.create({
       amount: amount * 100,
       confirm: true,
-      currency: 'clp',
+      currency: 'usd',
       payment_method: 'pm_card_visa',
       return_url: "https://google.com"
     })
 
-    this.notificationsService.emit('notify_email', { email })
+    this.notificationsService.emit('notify_email', { email, text: `Your payment of $${amount} has completed successfully` })
 
     return paymentIntent
   }
