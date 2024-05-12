@@ -24,7 +24,7 @@ spec:
           - name: GOOGLE_OAUTH_CLIENT_ID
             value: 844406708262-7sjgklnh0ludsb3mr4m74hhsnfvht7mo.apps.googleusercontent.com
           - name: SMTP_USER
-            value: 'holapistola19@gmail.com'
+            value: holapistola19@gmail.com
           - name: GOOGLE_OAUTH_CLIENT_SECRET  
             valueFrom:
               secretKeyRef:
