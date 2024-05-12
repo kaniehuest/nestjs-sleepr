@@ -51,7 +51,7 @@ steps:
         'build',
         '-t',
         'us-central1-docker.pkg.dev/sleepr-423019/notifications/production',
-        'f',
+        '-f',
         'apps/notifications/Dockerfile',
         '.'
       ]
