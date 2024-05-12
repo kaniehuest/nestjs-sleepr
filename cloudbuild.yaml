@@ -55,6 +55,6 @@ steps:
         'apps/notifications/Dockerfile',
         '.'
       ]
-  - name: 'gcr.io/cloud-builders/dockerfile'
+  - name: 'gcr.io/cloud-builders/docker'
     args: 
       [ 'push', 'us-central1-docker.pkg.dev/sleepr-423019/notifications/production' ]
