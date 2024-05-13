@@ -15,7 +15,7 @@ spec:
         app: auth
     spec:
       containers:
-      - image: us-central1-docker.pkg.dev/sleepr-423019/auth/production
+      - image: 905418155852.dkr.ecr.us-east-1.amazonaws.com/auth:latest
         name: auth
         env:
           - name: MONGODB_URI
