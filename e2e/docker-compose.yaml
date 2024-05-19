@@ -29,11 +29,15 @@ services:
     image: 905418155852.dkr.ecr.us-east-1.amazonaws.com/payments:latest
     env_file:
       - ../apps/payments/.env
+    ports:
+      - '3003:3003'
 
   notifications:
     image: 905418155852.dkr.ecr.us-east-1.amazonaws.com/notifications:latest
     env_file:
       - ../apps/notifications/.env
+    ports:
+      - '3004:3004'
 
   mongo:
     image: mongo
