@@ -24,7 +24,7 @@ export class UsersService {
 
     private async validateCreateUser(createUserDto: CreateUserDto) {
         try {
-            await this.usersRepository.findOne({email: createUserDto.email})
+            await this.usersRepository.findOne({ email: createUserDto.email })
         } catch (error) {
             return
         }
@@ -44,6 +44,6 @@ export class UsersService {
     }
 
     async getUser(getUserDto: GetUserDto) {
-        return this.usersRepository.findOne(getUserDto)
+        return this.usersRepository.findOne(getUserDto, { roles: true })
     }
 }
