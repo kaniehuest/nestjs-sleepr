@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
-import { DatabaseModule, LoggerModule, AUTH_SERVICE, PAYMENTS_SERVICE, HealthModule } from '@app/common';
+import { DatabaseModule, LoggerModule, AUTH_SERVICE, PAYMENTS_SERVICE, HealthModule, AUTH_PACKAGE_NAME, PAYMENTS_PACKAGE_NAME } from '@app/common';
 import { ReservationsRepository } from './reservations.repository';
 import { Reservation } from './models/reservation.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi'
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -27,10 +28,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       {
         name: AUTH_SERVICE,
         useFactory: (configService: ConfigService) => ({
-          transport: Transport.RMQ,
+          transport: Transport.GRPC,
           options: {
-            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
-            queue: 'auth'
+            package: AUTH_PACKAGE_NAME,
+            protoPath: join(__dirname, '../../proto/auth.proto'),
+            url: configService.getOrThrow('AUTH_GRPC_URL')
           }
         }),
         inject: [ConfigService]
@@ -38,10 +40,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       {
         name: PAYMENTS_SERVICE,
         useFactory: (configService: ConfigService) => ({
-          transport: Transport.RMQ,
+          transport: Transport.GRPC,
           options: {
-            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
-            queue: 'payments'
+            package: PAYMENTS_PACKAGE_NAME,
+            protoPath: join(__dirname, '../../proto/payments.proto'),
+            url: configService.getOrThrow('PAYMENTS_GRPC_URL')
           }
         }),
         inject: [ConfigService]
