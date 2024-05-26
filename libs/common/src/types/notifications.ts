@@ -8,6 +8,8 @@
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
 
+export const protobufPackage = "notifications";
+
 export interface Empty {
 }
 
@@ -18,27 +20,27 @@ export interface NotifyEmailMessage {
 
 export const NOTIFICATIONS_PACKAGE_NAME = "notifications";
 
-export interface NotificationsClient {
-  notifiEmail(request: NotifyEmailMessage): Observable<Empty>;
+export interface NotificationsServiceClient {
+  notifyEmail(request: NotifyEmailMessage): Observable<Empty>;
 }
 
-export interface NotificationsController {
-  notifiEmail(request: NotifyEmailMessage): Promise<Empty> | Observable<Empty> | Empty;
+export interface NotificationsServiceController {
+  notifyEmail(request: NotifyEmailMessage): Promise<Empty> | Observable<Empty> | Empty;
 }
 
-export function NotificationsControllerMethods() {
+export function NotificationsServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["notifiEmail"];
+    const grpcMethods: string[] = ["notifyEmail"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcMethod("Notifications", method)(constructor.prototype[method], method, descriptor);
+      GrpcMethod("NotificationsService", method)(constructor.prototype[method], method, descriptor);
     }
     const grpcStreamMethods: string[] = [];
     for (const method of grpcStreamMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcStreamMethod("Notifications", method)(constructor.prototype[method], method, descriptor);
+      GrpcStreamMethod("NotificationsService", method)(constructor.prototype[method], method, descriptor);
     }
   };
 }
 
-export const NOTIFICATIONS_SERVICE_NAME = "Notifications";
+export const NOTIFICATIONS_SERVICE_NAME = "NotificationsService";

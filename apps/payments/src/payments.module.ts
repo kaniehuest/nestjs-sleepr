@@ -3,9 +3,10 @@ import { PaymentsController } from './payments.controller';
 import { PaymentsService } from './payments.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi'
-import { LoggerModule } from '@app/common';
+import { LoggerModule, NOTIFICATIONS_PACKAGE_NAME } from '@app/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { NOTIFICATIONS_SERVICE } from '@app/common'
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -23,10 +24,11 @@ import { NOTIFICATIONS_SERVICE } from '@app/common'
       {
         name: NOTIFICATIONS_SERVICE,
         useFactory: (configService: ConfigService) => ({
-          transport: Transport.RMQ,
+          transport: Transport.GRPC,
           options: {
-            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
-            queue: 'notifications'
+            protoPath: join(__dirname, '../../../proton/notifications.proto'),
+            package: NOTIFICATIONS_PACKAGE_NAME,
+            url: configService.getOrThrow('NOTIFICATIONS_GRPC_URL')
           }
         }),
         inject: [ConfigService]
