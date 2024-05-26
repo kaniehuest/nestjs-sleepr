@@ -21,7 +21,7 @@ import { join } from 'path';
           transport: Transport.GRPC,
           options: {
             package: AUTH_PACKAGE_NAME,
-            protoPath: join(__dirname, '../../proto/auth.proto'),
+            protoPath: join(__dirname, '../../../proto/auth.proto'),
             url: configService.getOrThrow('AUTH_GRPC_URL')
           }
         }),
@@ -33,7 +33,7 @@ import { join } from 'path';
           transport: Transport.GRPC,
           options: {
             package: PAYMENTS_PACKAGE_NAME,
-            protoPath: join(__dirname, '../../proto/payments.proto'),
+            protoPath: join(__dirname, '../../../proto/payments.proto'),
             url: configService.getOrThrow('PAYMENTS_GRPC_URL')
           }
         }),

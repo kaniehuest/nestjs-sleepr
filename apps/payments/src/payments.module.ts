@@ -22,7 +22,7 @@ import { join } from 'path';
         useFactory: (configService: ConfigService) => ({
           transport: Transport.GRPC,
           options: {
-            protoPath: join(__dirname, '../../../proton/notifications.proto'),
+            protoPath: join(__dirname, '../../../proto/notifications.proto'),
             package: NOTIFICATIONS_PACKAGE_NAME,
             url: configService.getOrThrow('NOTIFICATIONS_GRPC_URL')
           }

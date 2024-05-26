@@ -55,7 +55,7 @@ services:
     ports: 
       - '3307:3306'
 
-  rabbitmq:
-    image: rabbitmq
-    ports:
-      - '5672:5672'
+  #rabbitmq:
+  #  image: rabbitmq
+  #  ports:
+  #    - '5672:5672'

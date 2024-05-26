@@ -13,7 +13,7 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       package: PAYMENTS_PACKAGE_NAME,
-      protoPath: join(__dirname, '../../../proto.payments.proto'),
+      protoPath: join(__dirname, '../../../proto/payments.proto'),
       url: configService.getOrThrow<string>('PAYMENTS_GRPC_URL')
     }
   })
