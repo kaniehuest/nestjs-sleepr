@@ -12,7 +12,7 @@ export class Reservation extends AbstractEntity<Reservation> {
     @Column()
     endDate: Date;
 
-    @Column({default: "1"})
+    @Column({ default: 1 })
     userId: number;
 
     @Column()
